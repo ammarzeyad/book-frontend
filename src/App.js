@@ -16,7 +16,7 @@ import {
 class App extends React.Component {
 
   render() {
-    const  isAuthenticated = this.props.auth0;
+    const  {isAuthenticated} = this.props.auth0;
     return(
       <>
         <Router>

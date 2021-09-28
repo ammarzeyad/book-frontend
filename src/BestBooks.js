@@ -1,10 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { withAuth0 } from '@auth0/auth0-react';
 import "./BestBooks.css";
 import Card from "react-bootstrap/Card";
 import { CardGroup } from "react-bootstrap";
 import axios from "axios";
-import { withAuth0 } from '@auth0/auth0-react';
+
 
 
 class MyFavoriteBooks extends React.Component {
@@ -14,16 +15,15 @@ class MyFavoriteBooks extends React.Component {
       books: []
     };
   }
-    componentDidMount = async () => {
-    let {person} = this.props.auth0;
-    let link = `${process.env.REACT_APP_SERVER}/books?emailin=${person.email}`;
+  componentDidMount = async () => {
+    let user = this.props.auth0.user.email;
+    let link = `${process.env.REACT_APP_SERVER}/books?emailin=${user}`;
     let BooksBackend = await axios.get(link);
     this.setState({
       books: BooksBackend.data
     });
     console.log(this.state.books);
   };
-
   render() {
     return (
       <>
