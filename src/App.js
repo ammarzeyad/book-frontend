@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './Header';
-import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './Footer';
 import BestBooks from './BestBooks.js';
 import Login from './Login.js';
@@ -12,7 +11,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
 class App extends React.Component {
 
   render() {

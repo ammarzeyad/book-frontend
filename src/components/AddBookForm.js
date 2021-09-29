@@ -1,10 +1,11 @@
-import React from 'react'
-import { Form, Button, Modal } from 'react-bootstrap'
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form, Button, Modal } from "react-bootstrap";
 import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 class Forms extends React.Component {
-  submitBookInfo = async (e) => {
+  SBInfo = async (e) => {
     e.preventDefault();
     const { user } = this.props.auth0;
     let book = {
@@ -14,22 +15,22 @@ class Forms extends React.Component {
       email: user.email,
     };
     let booksData = await axios.post(
-      `${process.env.REACT_APP_SERVER}/books`,
+      `${process.env.REACT_APP_SERVER}/addBook`,
       book
     );
     this.props.addBook(booksData.data);
     this.props.close();
   };
+
   render() {
     return (
       <div>
-
         <Modal show={this.props.showModel} onHide={this.props.close}>
           <Modal.Header closeButton>
             <Modal.Title>Add Books</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={this.submitBookInfo.bind(this)}>
+            <Form onSubmit={this.SBInfo.bind(this)}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Book Title</Form.Label>
                 <Form.Control type="text" placeholder="name" name="title" />
@@ -61,6 +62,5 @@ class Forms extends React.Component {
     );
   }
 }
-
 
 export default withAuth0(Forms);
